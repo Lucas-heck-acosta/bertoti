@@ -22,112 +22,131 @@ A engenharia de software é similar às outras engenharias na aplicação de uma
 
 ## Aula 3
 
-- Classe aluno
+- Classe Carro
 ```java
 
-//declarando a classe, um substantivo 
-public class Aluno {
+// Declarando a classe, um substantivo
+public class Carro {
 
-  //declarando seus atributos (privados, onde apenas a classe tem acesso)
-	private String nome;
-	private String ra;
-	
-	//construtor, o código que acontece na criação do objeto, podendo ser passado argumentos para utilizar na lógica
-	public Aluno(String nome, String ra) {
-	  //this para acessar o atributo da classe
-		this.nome = nome;
-		this.ra = ra;
-	}
+  // Declarando seus atributos
+  private String modelo;
+  private String placa;
+  private int ano;
 
-  //metodos são como as funções que podem ser chamadas de cada classe, como uma maneira de solicitar um retorno ou efetuar uma operação
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getRa() {
-		return ra;
-	}
-	public void setRa(String ra) {
-		this.ra = ra;
-	}
-	
+  // Construtor, o código que acontece na criação do objeto, podendo ser passado argumentos para utilizar na lógica
+  public Carro(String modelo, String placa, int ano) {
+    // this para acessar o atributo da classe
+    this.modelo = modelo;
+    this.placa = placa;
+    this.ano = ano;
+  }
+
+  // Métodos são como as funções que podem ser chamadas de cada classe, como uma maneira de solicitar um retorno ou efetuar uma operação
+  public String getModelo() {
+    return modelo;
+  }
+
+  public void setModelo(String modelo) {
+    this.modelo = modelo;
+  }
+
+  public String getPlaca() {
+    return placa;
+  }
+
+  public void setPlaca(String placa) {
+    this.placa = placa;
+  }
+
+  public int getAno() {
+    return ano;
+  }
+
+  public void setAno(int ano) {
+    this.ano = ano;
+  }
+
+  // Método para exibir informações do carro
+  public void exibirInformacoes() {
+    System.out.println("Modelo: " + modelo);
+    System.out.println("Placa: " + placa);
+    System.out.println("Ano: " + ano);
+  }
+
 }
+
 
 
 ```
 
-- Classe SalaAula
+- Classe Garagem
 ```java
+import java.util.ArrayList;
 
-import java.util.List;
-import java.util.LinkedList;
+// Declarando a classe Garagem
+public class Garagem {
 
-public class SalaAula {
-  //Utilizando a classe predefinida List do pacote Util
-	private List<Aluno> alunos = new LinkedList<Aluno>();
+  // Declarando o atributo para armazenar a lista de carros
+  private ArrayList<Carro> carros;
 
-  //um metodo para adicionar o aluno passado no parametro a lista de alunos na sala
-	public void cadastrarAluno(Aluno aluno) {
-		alunos.add(aluno);
-	}
+  public Garagem() {
+    carros = new ArrayList<>();
+  }
 
+  // Método para adicionar um carro a garagem
+  public void adicionarCarro(Carro carro) {
+    carros.add(carro);
+  }
 
-	public List<Aluno> buscarAlunoPorNome(String nome){
-    //cria uma nova lista vazia
-		List<Aluno> alunosEncontrados = new LinkedList<Aluno>();
-		for(Aluno aluno:alunos) { //passa por todos os alunos da lista original
-			if(aluno.getNome().equals(nome)) //se um aluno for encontrado com o nome passado
-				alunosEncontrados.add(aluno);  //adiciona esse aluno a lista temporaria do metodo
-		}
-		return alunosEncontrados; //retorna a lista com os alunos correspondentes
-	}
-	
-	public List<Aluno> getAlunos(){
-		return alunos;
-	}
-	
+  // Método para remover um carro da garagem
+  public void removerCarro(Carro carro) {
+    carros.remove(carro);
+  }
+
+  // Método para exibir todos os carros na garagem
+  public void exibirCarros() {
+    if (carros.isEmpty()) {
+      System.out.println("A garagem está vazia.");
+    }
+else {
+      System.out.println("Carros na garagem:");
+      for (Carro carro : carros) {
+        carro.exibirInformacoes();
+        System.out.println();
+      }
+    }
+  }
+
 }
-
 
 ```
 
 - Testes
 
 ```java
-//importando os pacotes para realizar os testes
+//import para fazer os testes automatizados
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
+import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
+class GaragemTest {
 
-class Teste {
+    private Garagem garagem;
+    private Carro carro1;
+    private Carro carro2;
 
-	@Test
-	void test() {
-		
-		SalaAula fatecBancoDeDados = new SalaAula();
+    @Test
+    void testAdicionarCarro() {
 
-    //criando duas instancias de aluno com os dados de teste 
-		Aluno lucas = new Aluno("Lucas", "123123");
-		Aluno pedro = new Aluno("Pedro", "555555");
-		
-		fatec.cadastrarAluno(lucas);
-		fatec.cadastrarAluno(pedro);
+	//cria carros para o teste
+	carro1 = new Carro("Fusca", "ABC-1234", 1980);
+        carro2 = new Carro("Civic", "DEF-4321", 2020);
+	//adiciona eles na garagem
+        garagem.adicionarCarro(carro1);
+        garagem.adicionarCarro(carro2);
 
-    // testando se o tamanho da lista de alunos é igual a dois, depois de ter adicionado dois alunos a uma lista vazia
-		assertEquals(fatec.getAlunos().size(), 2);
-
-    //Criando uma nova lista que vem do metado de buscar alunos, utilizando o parametro "lucas"
-		List<Aluno> todosOsLucas = fatec.buscarAlunoPorNome("lucas");
-
-    //como criamos apenas um lucas, o tamanho da nova lista deve ser 1
-		assertEquals(todosOsLucas.size(), 1);
-		
-		
-	}
-
+        // Verifica se o número de carros na garagem é 2
+        assertEquals(2, garagem.getCarros().size());
+    }
 }
 
 ```
