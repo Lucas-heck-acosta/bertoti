@@ -15,7 +15,7 @@ public class Ollama {
         ollamaAPI.setRequestTimeoutSeconds(200);
 
         // Check if the prompt requests a data analysis from the CSV
-        if (prompt.toLowerCase().contains("medalha") || prompt.toLowerCase().contains("medalhista")) {
+        if (prompt.toLowerCase().contains("medalha") || prompt.toLowerCase().contains("medalhista") || prompt.toLowerCase().contains("esporte") || prompt.toLowerCase().contains("todos os atletas")) {
             return databaseHandler.handleDataAnalysis(prompt, csvFile);
         }
 

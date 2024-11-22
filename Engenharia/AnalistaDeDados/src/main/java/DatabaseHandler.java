@@ -59,14 +59,21 @@ public class DatabaseHandler {
         countryMap.put("türquia", "TUR");
         countryMap.put("iran", "IRI");
         countryMap.put("sri lanka", "LKA");
+        countryMap.put("méxico", "MEX");
+        countryMap.put("mexico", "MEX");
+        countryMap.put("argentina", "ARG");
     }
 
     public String handleDataAnalysis(String prompt, String csvFile) {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             List<String[]> records = reader.readAll();
 
-            if (prompt.toLowerCase().contains("atleta")) {
+            if (prompt.toLowerCase().contains("todos os atletas")) {
+                return listAllAthletes(records, prompt);
+            } else if (prompt.toLowerCase().contains("atleta")) {
                 return findTopAthlete(records, prompt);
+            } else if (prompt.toLowerCase().contains("quantas medalhas") && prompt.toLowerCase().contains("esporte")) {
+                return countMedalsBySport(records, prompt);
             }
 
             String medalType = extractMedalTypeFromPrompt(prompt);
@@ -75,6 +82,38 @@ public class DatabaseHandler {
             e.printStackTrace();
             return "Erro ao tentar analisar os dados.";
         }
+    }
+
+    private String countMedalsBySport(List<String[]> records, String prompt) {
+        Map<String, Integer> sportMedalCount = new HashMap<>();
+        String countryName = extractCountryFromPrompt(prompt);
+        String countryCode = countryMap.get(countryName.toLowerCase());
+        String sportName = extractSportFromPrompt(prompt);
+
+        if (countryCode == null) {
+            return "Não reconheço o país mencionado na mensagem.";
+        }
+
+        for (String[] record : records) {
+            String recordCountryCode = record[5].trim();
+            String sport = record[11].trim(); // Assuming the discipline is in the 12th column
+
+            if (countryCode.equalsIgnoreCase(recordCountryCode) && sport.equalsIgnoreCase(sportName)) {
+                sportMedalCount.put(sport, sportMedalCount.getOrDefault(sport, 0) + 1);
+            }
+        }
+
+        return "O país " + countryName + " ganhou " + sportMedalCount.getOrDefault(sportName, 0) + " medalhas no esporte " + sportName + ".";
+    }
+
+    private String extractSportFromPrompt(String prompt) {
+        String[] words = prompt.split(" ");
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equalsIgnoreCase("esporte")) {
+                return words[i + 1];
+            }
+        }
+        return "";
     }
 
     private String countMedals(List<String[]> records, String medalType, String prompt) {
@@ -142,6 +181,32 @@ public class DatabaseHandler {
         }
     }
 
+    private String listAllAthletes(List<String[]> records, String prompt) {
+        Set<String> athletes = new HashSet<>();
+        String countryName = extractCountryFromPrompt(prompt);
+        String countryCode = countryMap.get(countryName.toLowerCase());
+
+        if (countryCode == null) {
+            return "Não reconheço o país mencionado na mensagem.";
+        }
+
+        for (String[] record : records) {
+            String recordCountryCode = record[5].trim();
+            String athleteName = record[3].trim();
+
+            if (countryCode.equalsIgnoreCase(recordCountryCode)) {
+                athletes.add(athleteName);
+            }
+        }
+
+        StringBuilder response = new StringBuilder("Atletas do país " + countryName + ":\n");
+        for (String athlete : athletes) {
+            response.append(athlete).append("\n");
+        }
+
+        return response.toString();
+    }
+
     private String convertMedalTypeToPortuguese(String medalType) {
         if (medalType.equalsIgnoreCase("Gold Medal")) {
             return "ouro";
@@ -171,5 +236,25 @@ public class DatabaseHandler {
             }
         }
         return "";
+    }
+
+    public Set<String> getAvailableSports(String csvFile) {
+        Set<String> sports = new HashSet<>();
+        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
+            List<String[]> records = reader.readAll();
+            for (String[] record : records) {
+                String sport = record[11].trim(); // Assuming the discipline is in the 12th column
+                sports.add(sport);
+            }
+        } catch (IOException | CsvException e) {
+            e.printStackTrace();
+        }
+        return sports;
+    }
+
+    public static void main(String[] args) {
+        DatabaseHandler handler = new DatabaseHandler();
+        Set<String> sports = handler.getAvailableSports("/path/to/your/csvfile.csv");
+        System.out.println("Available sports: " + sports);
     }
 }
