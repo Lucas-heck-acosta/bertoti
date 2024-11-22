@@ -61,7 +61,6 @@ public class DatabaseHandler {
         countryMap.put("sri lanka", "LKA");
         countryMap.put("méxico", "MEX");
         countryMap.put("mexico", "MEX");
-        countryMap.put("argentina", "ARG");
     }
 
     public String handleDataAnalysis(String prompt, String csvFile) {
@@ -96,7 +95,7 @@ public class DatabaseHandler {
 
         for (String[] record : records) {
             String recordCountryCode = record[5].trim();
-            String sport = record[11].trim(); // Assuming the discipline is in the 12th column
+            String sport = record[11].trim();
 
             if (countryCode.equalsIgnoreCase(recordCountryCode) && sport.equalsIgnoreCase(sportName)) {
                 sportMedalCount.put(sport, sportMedalCount.getOrDefault(sport, 0) + 1);
@@ -243,7 +242,7 @@ public class DatabaseHandler {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             List<String[]> records = reader.readAll();
             for (String[] record : records) {
-                String sport = record[11].trim(); // Assuming the discipline is in the 12th column
+                String sport = record[11].trim();
                 sports.add(sport);
             }
         } catch (IOException | CsvException e) {
@@ -254,7 +253,7 @@ public class DatabaseHandler {
 
     public static void main(String[] args) {
         DatabaseHandler handler = new DatabaseHandler();
-        Set<String> sports = handler.getAvailableSports("/path/to/your/csvfile.csv");
+        Set<String> sports = handler.getAvailableSports("\"/Users/lucas/Documents/engenharia/automacaoChat/AnalistaDeDados/src/main/java/medallists.csv\"");
         System.out.println("Available sports: " + sports);
     }
 }

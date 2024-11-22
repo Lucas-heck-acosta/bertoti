@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Ollama {
     private final String host = "http://localhost:11434/";
     private final DatabaseHandler databaseHandler = new DatabaseHandler();
-    private final String csvFile = "/Users/lucas/Documents/engenharia/automacaoChat/AnalistaDeDados/src/main/java/medallists.csv"; // Adjust the path as needed
+    private final String csvFile = "/Users/lucas/Documents/engenharia/automacaoChat/AnalistaDeDados/src/main/java/medallists.csv";
 
     public String getOllamaResponse(String prompt) throws OllamaBaseException, IOException, InterruptedException {
         OllamaAPI ollamaAPI = new OllamaAPI(host);
