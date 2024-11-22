@@ -10,13 +10,13 @@ A engenharia de software é similar às outras engenharias na aplicação de uma
 ## Aula 2
 
 - Portabilidade
-    Fazer um software portátil o torna mais difícil de otimizar, ao passo que otimizar um software para um dispositivo específico pode sacrificar sua portabilidade.
+    -Fazer um software portátil o torna mais difícil de otimizar, ao passo que otimizar um software para um dispositivo específico pode sacrificar sua portabilidade.
 
 - Ecalabilidade
-    Projetar um sistema escalável o torna muito mais complexo, enquanto projetos simples tem uma capacidade limitada.
+    -Projetar um sistema escalável o torna muito mais complexo, enquanto projetos simples tem uma capacidade limitada.
 
 - Manutenção
-    Manter um código de fácil e eficiente manutenção pode custar muito tempo e acabar atrasando o projeto, enquanto um código entregue antes do prazo pode apresentar dificuldades de manutenção.
+    -Manter um código de fácil e eficiente manutenção pode custar muito tempo e acabar atrasando o projeto, enquanto um código entregue antes do prazo pode apresentar dificuldades de manutenção.
 
 
 
@@ -150,3 +150,18 @@ class GaragemTest {
 }
 
 ```
+
+- UML
+
+<img width="865" alt="image" src="https://github.com/user-attachments/assets/1b919484-ba08-49e5-b9f2-ad8737b325a4">
+
+
+
+
+## exemplos de perguntas que o bot consegue responder
+
+* Quantas medalhas de prata o brasil ganhou?
+* Qual atleta do brasil ganhou mais medalhas?
+* Quais são todos os atletas do Brasil?
+* Quantas medalhas o brasil ganhou no esporte Skateboarding
+* quais sao todos os atletas do argentina ?
