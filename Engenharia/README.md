@@ -10,13 +10,13 @@ A engenharia de software é similar às outras engenharias na aplicação de uma
 ## Aula 2
 
 - Portabilidade
-    Fazer um software portátil o torna mais difícil de otimizar, ao passo que otimizar um software para um dispositivo específico pode sacrificar sua portabilidade.
+    -Fazer um software portátil o torna mais difícil de otimizar, ao passo que otimizar um software para um dispositivo específico pode sacrificar sua portabilidade.
 
 - Ecalabilidade
-    Projetar um sistema escalável o torna muito mais complexo, enquanto projetos simples tem uma capacidade limitada.
+    -Projetar um sistema escalável o torna muito mais complexo, enquanto projetos simples tem uma capacidade limitada.
 
 - Manutenção
-    Manter um código de fácil e eficiente manutenção pode custar muito tempo e acabar atrasando o projeto, enquanto um código entregue antes do prazo pode apresentar dificuldades de manutenção.
+    -Manter um código de fácil e eficiente manutenção pode custar muito tempo e acabar atrasando o projeto, enquanto um código entregue antes do prazo pode apresentar dificuldades de manutenção.
 
 
 
