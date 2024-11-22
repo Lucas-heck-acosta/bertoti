@@ -150,3 +150,18 @@ class GaragemTest {
 }
 
 ```
+
+- UML
+
+<img width="865" alt="image" src="https://github.com/user-attachments/assets/1b919484-ba08-49e5-b9f2-ad8737b325a4">
+
+
+
+
+## exemplos de perguntas que o bot consegue responder
+
+* Quantas medalhas de prata o brasil ganhou?
+* Qual atleta do brasil ganhou mais medalhas?
+* Quais são todos os atletas do Brasil?
+* Quantas medalhas o brasil ganhou no esporte Skateboarding
+* quais sao todos os atletas do argentina ?
