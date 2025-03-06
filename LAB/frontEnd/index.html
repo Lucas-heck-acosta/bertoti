@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventiladores</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Controle de Ventiladores</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Lista de Ventiladores</h2>
+            <div id="ventiladores" class="ventiladores-container">
+                <!-- Ventiladores serão listados aqui -->
+            </div>
+        </section>
+        <section>
+            <h2>Adicionar Novo Ventilador</h2>
+            <form id="addVentiladorForm">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                <label for="potencia">Potência:</label>
+                <input type="number" id="potencia" name="potencia" required>
+                <button type="submit">Adicionar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Controle de Ventiladores</p>
+    </footer>
+    <script src="index.js"></script>
+</body>
+
+</html>
