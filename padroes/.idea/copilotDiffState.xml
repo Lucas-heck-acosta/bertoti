@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/combinado/README.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/combinado/README.md" />
+              <option name="updatedContent" value="# Combined Design Patterns: Strategy + Observer + Composite&#10;&#10;## Overview&#10;This package demonstrates how three design patterns work together in a company management system:&#10;&#10;- **Composite**: Hierarchical organization structure (departments containing employees/subdepartments)&#10;- **Strategy**: Different work modes that affect employee productivity &#10;- **Observer**: HR monitoring system that tracks productivity changes&#10;&#10;## Pattern Integration&#10;&#10;### Composite Pattern&#10;- `OrganizationComponent`: Abstract component for both employees and departments&#10;- `Employee`: Leaf nodes representing individual workers&#10;- `Department`: Composite nodes that can contain employees and subdepartments&#10;&#10;### Strategy Pattern&#10;- `WorkMode`: Strategy interface for different work arrangements&#10;- `OfficeWork`: 100% productivity strategy&#10;- `RemoteWork`: 90% productivity strategy  &#10;- `HybridWork`: 95% productivity strategy&#10;&#10;### Observer Pattern&#10;- `Subject`: Interface for components that can be observed&#10;- `Observer`: Interface for HR monitoring systems&#10;- `HRMonitor`: Concrete observer that tracks productivity changes&#10;&#10;## How They Work Together&#10;&#10;1. **Composite + Observer**: Each component in the hierarchy can be observed by HR systems&#10;2. **Strategy + Observer**: When employees change work modes, observers are automatically notified&#10;3. **Composite + Strategy**: Departments calculate average productivity based on their employees' strategies&#10;4. **All Three**: HR systems monitor the entire organization tree and react to strategy changes&#10;&#10;## Key Benefits&#10;&#10;- **Flexible Structure**: Easy to add/remove departments and employees&#10;- **Runtime Strategy Changes**: Employees can switch work modes dynamically&#10;- **Automatic Monitoring**: HR systems are notified of all productivity changes&#10;- **Scalable**: Adding new work modes or monitoring systems is straightforward&#10;&#10;## Usage&#10;```bash&#10;javac *.java&#10;java Main&#10;```" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/composite/antipadrao/README.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/composite/antipadrao/README.md" />
+              <option name="updatedContent" value="# Anti-Padrão Composite&#10;&#10;## Descrição&#10;Esta implementação demonstra os problemas que surgem quando **NÃO** utilizamos o padrão Composite. Sem uma interface comum, o código se torna complexo, repetitivo e difícil de manter.&#10;&#10;## Problemas Identificados&#10;&#10;### 1. Falta de Interface Comum&#10;- Funcionário e Departamento são classes completamente separadas&#10;- Não há polimorfismo - cliente precisa saber o tipo específico&#10;- Impossível tratar funcionários e departamentos uniformemente&#10;&#10;### 2. Métodos Duplicados e Específicos&#10;- `adicionarFuncionario()` vs `adicionarSubdepartamento()`&#10;- `removerFuncionario()` vs `removerSubdepartamento()`&#10;- Cliente precisa usar métodos diferentes para cada tipo&#10;&#10;### 3. Lógica Complexa e Repetitiva&#10;- Método `mostrarDetalhes()` tem lógica condicional complexa&#10;- Método `calcularSalarioTotal()` precisa tratar cada tipo separadamente&#10;- Código difícil de manter e estender&#10;&#10;### 4. Violação do Princípio Aberto/Fechado&#10;- Para adicionar um novo tipo (ex: Terceirizado), seria necessário:&#10;  - Modificar a classe Departamento&#10;  - Adicionar novos métodos específicos&#10;  - Alterar toda a lógica existente&#10;&#10;## Comparação com o Padrão&#10;| Aspecto | Anti-Padrão | Padrão Composite |&#10;|---------|-------------|------------------|&#10;| Interface | Sem interface comum | Interface `Componente` única |&#10;| Métodos | Específicos por tipo | Uniformes para todos |&#10;| Polimorfismo | Não utiliza | Utiliza plenamente |&#10;| Manutenção | Difícil | Fácil |&#10;| Extensibilidade | Muito difícil | Simples |&#10;&#10;## Como executar&#10;```bash&#10;javac *.java&#10;java Main&#10;```" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/composite/padrao/README.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/composite/padrao/README.md" />
+              <option name="updatedContent" value="# Padrão Composite&#10;&#10;## Descrição&#10;O padrão Composite permite compor objetos em estruturas de árvore para representar hierarquias &quot;parte-todo&quot;. Este padrão permite que clientes tratem objetos individuais e composições de objetos de maneira uniforme.&#10;&#10;## Estrutura&#10;- **Componente**: Interface comum para objetos simples e complexos da composição&#10;- **Folha (Funcionario)**: Elemento básico da composição que não tem filhos&#10;- **Composite (Departamento)**: Elemento que tem filhos e implementa operações relacionadas aos filhos&#10;&#10;## Vantagens&#10;- Facilita a criação de estruturas hierárquicas complexas&#10;- Permite tratar objetos individuais e composições uniformemente&#10;- Simplifica o código cliente&#10;- Facilita a adição de novos tipos de componentes&#10;&#10;## Exemplo de Uso&#10;O exemplo demonstra uma estrutura organizacional onde:&#10;- Funcionários são folhas (não têm subordinados)&#10;- Departamentos são composites (podem conter funcionários e subdepartamentos)&#10;- Ambos implementam a mesma interface, permitindo operações uniformes&#10;&#10;## Como executar&#10;```bash&#10;javac *.java&#10;java Main&#10;```" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/estrategia/antipadrao/FuncionarioCLT.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/estrategia/antipadrao/FuncionarioCLT.java" />
+              <option name="originalContent" value="class FuncionarioCLT extends Funcionario {&#10;    private String tipoDePonto;&#10;&#10;    public FuncionarioCLT(String nome, String cargo, double salario) {&#10;        super(nome, cargo, salario);&#10;        this.tipoDePonto = &quot;Cartão&quot;;&#10;    }&#10;&#10;    public String baterPonto() {&#10;        return &quot;Ponto registrado com Cartão&quot;;&#10;    }&#10;&#10;    public String getTipoDePonto() {&#10;        return tipoDePonto;&#10;    }&#10;}" />
+              <option name="updatedContent" value="class FuncionarioCLT extends Funcionario {&#10;    private String tipoDePonto;&#10;&#10;    public FuncionarioCLT(String nome, String cargo, double salario) {&#10;        super(nome, cargo, salario);&#10;        this.tipoDePonto = &quot;Cartão&quot;;&#10;    }&#10;&#10;    public String baterPonto() {&#10;        return &quot;Ponto registrado com Cartão&quot;;&#10;    }&#10;&#10;    public String getTipoDePonto() {&#10;        return tipoDePonto;&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/estrategia/antipadrao/FuncionarioPJ.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/estrategia/antipadrao/FuncionarioPJ.java" />
+              <option name="originalContent" value="class FuncionarioPJ extends Funcionario {&#10;    private String tipoDePonto;&#10;&#10;    public FuncionarioPJ(String nome, String cargo, double salario) {&#10;        super(nome, cargo, salario);&#10;        this.tipoDePonto = &quot;Online&quot;;&#10;    }&#10;&#10;    public String baterPonto() {&#10;        return &quot;Ponto registrado Online&quot;;&#10;    }&#10;&#10;    public String getTipoDePonto() {&#10;        return tipoDePonto;&#10;    }&#10;}" />
+              <option name="updatedContent" value="class FuncionarioPJ extends Funcionario {&#10;    private String tipoDePonto;&#10;&#10;    public FuncionarioPJ(String nome, String cargo, double salario) {&#10;        super(nome, cargo, salario);&#10;        this.tipoDePonto = &quot;Online&quot;;&#10;    }&#10;&#10;    public String baterPonto() {&#10;        return &quot;Ponto registrado Online&quot;;&#10;    }&#10;&#10;    public String getTipoDePonto() {&#10;        return tipoDePonto;&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/estrategia/padrao/Main.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/estrategia/padrao/Main.java" />
+              <option name="originalContent" value="// Pequena demonstração do uso do Strategy para tipos de ponto&#10;public class Main {&#10;    public static void main(String[] args) {&#10;        Funcionario ana = new Funcionario(&quot;Ana&quot;, &quot;Analista&quot;, 5000.0, new PontoCartao());&#10;        Funcionario bruno = new Funcionario(&quot;Bruno&quot;, &quot;Desenvolvedor&quot;, 7000.0, new PontoOnline());&#10;&#10;        System.out.println(ana.getNome() + &quot;: &quot; + ana.baterPonto());&#10;        System.out.println(bruno.getNome() + &quot;: &quot; + bruno.baterPonto());&#10;&#10;        ana.setTipoDePonto(new PontoOnline());&#10;        System.out.println(ana.getNome() + &quot; (trocado): &quot; + ana.baterPonto());&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="// Pequena demonstração do uso do Strategy para tipos de ponto&#10;public class Main {&#10;    public static void main(String[] args) {&#10;        Funcionario ana = new Funcionario(&quot;Ana&quot;, &quot;Analista&quot;, 5000.0, new PontoCartao());&#10;        Funcionario bruno = new Funcionario(&quot;Bruno&quot;, &quot;Desenvolvedor&quot;, 7000.0, new PontoOnline());&#10;&#10;        System.out.println(ana.getNome() + &quot;: &quot; + ana.baterPonto());&#10;        System.out.println(bruno.getNome() + &quot;: &quot; + bruno.baterPonto());&#10;&#10;        ana.setTipoDePonto(new PontoOnline());&#10;        System.out.println(ana.getNome() + &quot; (trocado): &quot; + ana.baterPonto());&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/observador/padrao/Observer.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/observador/padrao/Observer.java" />
+              <option name="updatedContent" value="// Interface Observer - alternativa ao Observador (ambas podem coexistir)&#10;public interface Observer {&#10;    void update(double precoAcao, double precoFii);&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

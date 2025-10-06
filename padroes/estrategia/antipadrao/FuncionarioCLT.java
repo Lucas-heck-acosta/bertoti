@@ -6,6 +6,10 @@ class FuncionarioCLT extends Funcionario {
         this.tipoDePonto = "Cartão";
     }
 
+    public String baterPonto() {
+        return "Ponto registrado com Cartão";
+    }
+
     public String getTipoDePonto() {
         return tipoDePonto;
     }

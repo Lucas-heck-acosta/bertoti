@@ -6,6 +6,10 @@ class FuncionarioPJ extends Funcionario {
         this.tipoDePonto = "Online";
     }
 
+    public String baterPonto() {
+        return "Ponto registrado Online";
+    }
+
     public String getTipoDePonto() {
         return tipoDePonto;
     }

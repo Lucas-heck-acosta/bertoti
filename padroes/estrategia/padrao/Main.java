@@ -8,6 +8,6 @@ public class Main {
         System.out.println(bruno.getNome() + ": " + bruno.baterPonto());
 
         ana.setTipoDePonto(new PontoOnline());
-        System.out.println(ana.getNome() + " (trocado): " + f1.baterPonto());
+        System.out.println(ana.getNome() + " (trocado): " + ana.baterPonto());
     }
 }
