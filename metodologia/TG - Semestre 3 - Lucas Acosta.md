@@ -123,23 +123,19 @@ A empresa parceira foi a **Altave**, que apresentou a necessidade de uma soluç�
 
 - **Chart.js + ApexCharts** – Habilidade em criar dashboards interativas e responsivas, transformando dados brutos em visualizações claras e dinâmicas para facilitar a análise dos usuários.
 
-- **Banco de Dados Relacional + Supabase – Experiência em modelagem de entidades complexas, aplicando constraints de integridade e garantindo consistência dos dados. Assim como conectar o banco em uma plataforma cloud para deploy da aplicação.
+- **Banco de Dados Relacional + Supabase** – Experiência em modelagem de entidades complexas, aplicando constraints de integridade e garantindo consistência dos dados. Assim como conectar o banco em uma plataforma cloud para deploy da aplicação.
 
 - **Programação Concorrente em Java** – Conhecimento na otimização de processamento de grandes volumes de dados em paralelo, garantindo performance em operações de agregação de métricas para o dashboard.
 
 #### Soft Skills
 
-Trabalho em equipe – Atuei em conjunto com o time para dividir responsabilidades entre backend e frontend, garantindo integração coerente entre as partes. Essa habilidade foi crucial para alinhar entregas e evitar conflitos de implementação.
+- Trabalho em equipe – Atuei em conjunto com o time para dividir responsabilidades e repassar conhecimentos para outros membros, assim como fazer perguntas quando precisei.
 
-Comunicação técnica – Precisei traduzir conceitos mais complexos (como autenticação JWT, concorrência e modelagem relacional) para colegas de equipe com diferentes níveis de familiaridade. Isso facilitou decisões de arquitetura compartilhadas.
+- Comunicação técnica – Precisei traduzir conceitos mais complexos (como autenticação JWT, concorrência e modelagem relacional) para colegas de equipe com diferentes níveis de familiaridade. Isso facilitou a tomada de decisão sem que todos precisassem pesquisar o tópico tecnicamente.
 
-Organização e atenção a detalhes – Fundamental na geração de relatórios e no desenho das entidades, onde pequenos erros poderiam comprometer a integridade ou legibilidade das informações.
+- Aprendizado contínuo – Desenvolvi novas competências técnicas (como concorrência) ao longo do projeto, sempre pesquisando e testando alternativas para entregar soluções mais completas.
 
-Resolução de problemas – Durante o desenvolvimento da dashboard e do sistema de autenticação, enfrentei desafios de performance e segurança que exigiram análise crítica e implementação de soluções robustas (como uso de threads em paralelo e refresh tokens).
-
-Aprendizado contínuo – Desenvolvi novas competências técnicas (como concorrência em Java e bibliotecas de relatórios) ao longo do projeto, sempre pesquisando e testando alternativas para entregar soluções mais completas.
-
-Pensamento orientado a usuário – Mesmo focado no backend, procurei desenhar endpoints e fluxos de autenticação pensando na experiência final de quem utiliza o sistema, garantindo simplicidade e clareza nos retornos da API.
+- Pensamento orientado a usuário – Mesmo focado no backend, procurei desenhar endpoints e fluxos de autenticação pensando na experiência final de quem utiliza o sistema, garantindo simplicidade e clareza nos retornos da API.
 
 
 
