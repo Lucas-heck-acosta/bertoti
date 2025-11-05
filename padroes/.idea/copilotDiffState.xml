@@ -3,6 +3,51 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
+        <entry key="$PROJECT_DIR$/adapter/padrao/JpegReader.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/adapter/padrao/JpegReader.java" />
+              <option name="originalContent" value="// Adaptee: classe legada com interface incompatível&#10;public class JpegReader {&#10;    public void readJpeg(String path) {&#10;        System.out.println(&quot;Lendo JPEG: &quot; + path);&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="// Adaptee: classe legada com interface incompatível&#10;public class JpegReader {&#10;    public void readJpeg(String path) {&#10;        System.out.println(&quot;Lendo JPEG: &quot; + path);&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/adapter/padrao/JpegToPngAdapter.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/adapter/padrao/JpegToPngAdapter.java" />
+              <option name="originalContent" value="// Adapter: adapta JpegReader para interface Converter&#10;public class JpegToPngAdapter implements Converter {&#10;    private JpegReader jpegReader;&#10;&#10;    public JpegToPngAdapter(JpegReader jpegReader) {&#10;        this.jpegReader = jpegReader;&#10;    }&#10;&#10;    @Override&#10;    public void convert(String source) {&#10;        jpegReader.readJpeg(source);&#10;        System.out.println(&quot;Convertendo para PNG: &quot; + source + &quot;.png&quot;);&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="// Adapter: adapta JpegReader para interface Converter&#10;public class JpegToPngAdapter implements Converter {&#10;    private JpegReader jpegReader;&#10;&#10;    public JpegToPngAdapter(JpegReader jpegReader) {&#10;        this.jpegReader = jpegReader;&#10;    }&#10;&#10;    @Override&#10;    public void convert(String source) {&#10;        jpegReader.readJpeg(source);&#10;        System.out.println(&quot;Convertendo para PNG: &quot; + source + &quot;.png&quot;);&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/adapter/padrao/LegacyJPEGReader.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/adapter/padrao/LegacyJPEGReader.java" />
+              <option name="originalContent" value="// Adaptee: biblioteca legada que só lê JPEG e retorna bytes simulados&#10;public class LegacyJPEGReader {&#10;    public byte[] loadJPEG(String path) {&#10;        System.out.println(&quot;Lendo JPEG legado: &quot; + path);&#10;        // Simulação de leitura&#10;        return (&quot;JPEG_DATA:&quot; + path).getBytes();&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="// Adaptee: biblioteca legada que só lê JPEG e retorna bytes simulados&#10;public class LegacyJPEGReader {&#10;    public byte[] loadJPEG(String path) {&#10;        System.out.println(&quot;Lendo JPEG legado: &quot; + path);&#10;        // Simulação de leitura&#10;        return (&quot;JPEG_DATA:&quot; + path).getBytes();&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/adapter/padrao/Main.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/adapter/padrao/Main.java" />
+              <option name="originalContent" value="// Target: interface que o cliente espera usar&#10;public interface ImageConverter {&#10;    void convert(String imagePath);&#10;}&#10;" />
+              <option name="updatedContent" value="public class Main {&#10;    public static void main(String[] args) {&#10;        // Criando o serviço legado&#10;        JpegService service = new JpegService();&#10;        &#10;        // Criando o adapter que envolve o serviço&#10;        ImageConverter adapter = new JpegAdapter(service);&#10;        &#10;        // Cliente usa apenas a interface, não conhece JpegService&#10;        Cliente cliente = new Cliente(adapter);&#10;        &#10;        // Fluxo: Cliente → ImageConverter → Adapter → JpegService&#10;        cliente.converterImagem(&quot;foto1.jpg&quot;);&#10;        cliente.converterImagem(&quot;foto2.jpg&quot;);&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/adapter/padrao/PNGWriter.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/adapter/padrao/PNGWriter.java" />
+              <option name="originalContent" value="// Componente existente que grava PNG&#10;public class PngWriter {&#10;    public String write(byte[] data, String targetPath) {&#10;        return targetPath; // Retorna destino sem processamento&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="// Componente existente que grava PNG&#10;public class PngWriter {&#10;    public String write(byte[] data, String targetPath) {&#10;        return targetPath; // Retorna destino sem processamento&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/combinado/README.md">
           <value>
             <PendingDiffInfo>
