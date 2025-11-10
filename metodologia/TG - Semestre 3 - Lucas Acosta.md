@@ -52,83 +52,108 @@ A empresa parceira foi a **Altave**, que apresentou a necessidade de uma soluç�
 
 #### Contribuições Pessoais
 
-- **Autenticação JWT**
+##### Autenticação JWT
+**Objetivo:** Garantir acesso seguro à aplicação por meio de autenticação stateless com JSON Web Tokens (JWT), protegendo rotas e dados sensíveis e oferecendo uma experiência fluida (login, refresh de sessão, logout).
+<details>
+<summary><strong>Autenticação JWT</strong></summary>
 
-    **Objetivo:** Garantir acesso seguro à aplicação por meio de autenticação stateless com **JSON Web Tokens (JWT)**, protegendo rotas e dados sensíveis e oferecendo uma experiência fluida (login, refresh de sessão, logout).
-    - **Backend** (Java + Spring boot / Spring Security)
+- **Backend** (Java + Spring boot / Spring Security)
   
-        Implementei toda a camada de autenticação e autorização utilizando um fluxo baseado em JWT. O **JwtAuthenticationFilter** foi configurado para liberar apenas os endpoints públicos de autenticação (/api/auth/) e a documentação Swagger, enquanto todo o restante da API permanece protegido. A classe JwtUtil atua como componente central para manipulação dos tokens, oferecendo geração de access tokens com claims personalizadas (como isAdmin), criação de refresh tokens para renovação segura da sessão, validação de integridade e expiração, além da extração de informações do usuário (e-mail, username). O AuthController concentra os endpoints de autenticação (/register e /login), delegando ao AuthenticationService o processamento das requisições e retornando respostas padronizadas, com tratamento apropriado de exceções. Durante o ciclo de requisições, o filtro de autenticação intercepta chamadas, extrai o token JWT do header Authorization, valida seus dados e carrega automaticamente o contexto de segurança, garantindo que apenas usuários autenticados tenham acesso aos recursos protegidos.
-    - **FrontEnd** (Vue.js + Router)
+  Implementei toda a camada de autenticação e autorização utilizando um fluxo baseado em JWT. O **JwtAuthenticationFilter** foi configurado para liberar apenas os endpoints públicos de autenticação (/api/auth/) e a documentação Swagger, enquanto todo o restante da API permanece protegido. A classe JwtUtil atua como componente central para manipulação dos tokens, oferecendo geração de access tokens com claims personalizadas (como isAdmin), criação de refresh tokens para renovação segura da sessão, validação de integridade e expiração, além da extração de informações do usuário (e-mail, username). O AuthController concentra os endpoints de autenticação (/register e /login), delegando ao AuthenticationService o processamento das requisições e retornando respostas padronizadas, com tratamento apropriado de exceções. Durante o ciclo de requisições, o filtro de autenticação intercepta chamadas, extrai o token JWT do header Authorization, valida seus dados e carrega automaticamente o contexto de segurança, garantindo que apenas usuários autenticados tenham acesso aos recursos protegidos.
+- **FrontEnd** (Vue.js + Router)
   
-        modelei a camada de autenticação utilizando Vue.js 3 em conjunto com o Vue Router, garantindo que a experiência do usuário fosse alinhada com as regras de segurança definidas no backend. O UserService centraliza toda a comunicação com a API de autenticação, oferecendo métodos padronizados para login, registro de usuários e validação de sessão. O token JWT e demais informações do usuário são armazenados de forma persistente no Local Storage, sendo automaticamente injetados nas chamadas subsequentes à API. Além disso, o sistema de rotas foi configurado com navigation guards, que verificam a validade do token antes de cada transição, bloqueando acessos não autorizados e redirecionando para a tela de login. Para melhorar a experiência, o histórico da navegação é preservado, permitindo que, após a autenticação, o usuário seja redirecionado para a página originalmente requisitada.
+  Modelei a camada de autenticação utilizando Vue.js 3 em conjunto com o Vue Router, garantindo que a experiência do usuário fosse alinhada com as regras de segurança definidas no backend. O UserService centraliza toda a comunicação com a API de autenticação, oferecendo métodos padronizados para login, registro de usuários e validação de sessão. O token JWT e demais informações do usuário são armazenados de forma persistente no Local Storage, sendo automaticamente injetados nas chamadas subsequentes à API. Além disso, o sistema de rotas foi configurado com navigation guards, que verificam a validade do token antes de cada transição, bloqueando acessos não autorizados e redirecionando para a tela de login. Para melhorar a experiência, o histórico da navegação é preservado, permitindo que, após a autenticação, o usuário seja redirecionado para a página originalmente requisitada.
 
+</details>
 
-- **Dashboard**
+##### Dashboard
+**Objetivo:** Compilar os dados de maneira clara, centralizada e acessível em métricas, gráficos e indicadores que auxiliam a tomada de decisão.
+<details>
+<summary><strong>Dashboard</strong></summary>
+
 ![Print da dashboard](https://raw.githubusercontent.com/Lucas-heck-acosta/bertoti/refs/heads/main/metodologia/dashboard.png)
 
-    **Objetivo:** Compilar os dados de maneira clara, centralizada e acessível, oferecendo uma visão consolidada das informações mais relevantes para o usuário. A Dashboard foi projetada para atuar como ponto inicial de navegação do sistema, reunindo métricas, gráficos e indicadores que refletem o estado atual do projeto e auxiliam na tomada de decisão.
-
-    - **Backend** (Java + Spring Boot)
-        
-        Desenvolvi endpoints específicos voltados à agregação de dados, já aplicando filtros e cálculos em tempo real. Isso garante que a camada de visualização receba informações consistentes e otimizadas, mesmo em cenários com grande volume de registros.
-
-        O DashboardController centraliza essa lógica no endpoint /api/dashboard, que processa requisições com parâmetros de período (startDate e endDate) e retorna métricas consolidadas de todas as empresas do sistema.
-
-        Para lidar com alta demanda e grandes bases, implementei processamento paralelo usando CompletableFuture em conjunto com ExecutorService. Isso permite que o CompanyService calcule simultaneamente os resultados de múltiplas empresas, reduzindo significativamente o tempo de resposta.
-    - **Frontend** (Vue.js + Chart.js + ApexCharts)
-
-        Desenvolvi a interface da Dashboard utilizando Vue.js 3 com foco em responsividade e interatividade. O DashboardService faz apenas uma chamada de API (a cada mudança de data), enviando parâmetros de período (startDate e endDate) para filtrar dados de forma dinâmica. 
-        
-        A camada visual foi construída com componentes modulares (cards) que renderizam diferentes tipos de métricas: cartões informativos para dados consolidados (total de funcionários, empresas ativas, folha salarial), gráficos interativos usando Chart.js e ApexCharts para visualização de tendências temporais e distribuições.
-        
-        Implementei sistema de atualização automática dos dados, com loading states e tratamento de erros para garantir uma experiência fluida. O layout responsivo garante visualização otimizada em diferentes dispositivos, enquanto filtros de período permitem análises customizadas.
-
-- **Relacionamento de Entidades**
+- **Backend** (Java + Spring Boot)
   
-  **Objetivo:** Estruturar as entidades e tabelas do banco de dados para permitir que um empregado, cargo e empresa se conectem unicamente a traves de uma tabela pivot. Esse esquema suporta que um funcionario tenha mais de um emprego em mais de uma empresa com salarios diferentes.
-
-  O modelo foi desenhado com três entidades principais: Empregado, Cargo e Empresa. Cada uma delas é independente, possuindo sua própria chave primária. A ligação entre essas entidades acontece por meio de uma tabela de relacionamento (ou tabela pivot), que armazena as chaves estrangeiras referentes a cada uma delas.
+  Desenvolvi endpoints específicos voltados à agregação de dados, já aplicando filtros e cálculos em tempo real. Isso garante que a camada de visualização receba informações consistentes e otimizadas, mesmo em cenários com grande volume de registros.
   
-  Essa tabela pivot, além de associar as entidades, também é responsável por guardar o salário. Com isso, é possível modelar cenários complexos em que, por exemplo, um mesmo empregado pode ocupar cargos diferentes em empresas distintas, recebendo valores de remuneração específicos para cada vínculo.
+  O DashboardController centraliza essa lógica no endpoint /api/dashboard, que processa requisições com parâmetros de período (startDate e endDate) e retorna métricas consolidadas de todas as empresas do sistema.
   
-  Do ponto de vista da integridade, foram aplicadas restrições de chave estrangeira para garantir que os vínculos sempre estejam associados a registros válidos de empregado, cargo e empresa. Isso assegura a consistência do banco de dados e evita duplicidade ou perda de informações.
-
-- **Geração de Relatórios**
-
-  **Objetivo:** Permitir que o sistema exporte automaticamente dados em formato PDF e Excel, organizados em tabelas, oferecendo ao usuário informações consolidadas e de fácil análise.
+  Para lidar com alta demanda e grandes bases, implementei processamento paralelo usando CompletableFuture em conjunto com ExecutorService. Isso permite que o CompanyService calcule simultaneamente os resultados de múltiplas empresas, reduzindo significativamente o tempo de resposta.
+- **Frontend** (Vue.js + Chart.js + ApexCharts)
   
-  No backend, fui responsável pela implementação completa do sistema de relatórios, integrando o ReportService ao DashboardController. Esse módulo suporta quatro tipos principais de relatórios: listagem de empresas, funcionários vinculados a cada empresa, folhas de ponto individuais e consolidação de horas trabalhadas por empresa.
+  Desenvolvi a interface da Dashboard utilizando Vue.js 3 com foco em responsividade e interatividade. O DashboardService faz apenas uma chamada de API (a cada mudança de data), enviando parâmetros de período (startDate e endDate) para filtrar dados de forma dinâmica. 
   
-  Para a camada de geração, utilizei duas bibliotecas específicas: Apache POI para criação de planilhas Excel e iText PDF para documentos em PDF. No caso das planilhas, configurei estilização com CellStyle e Font personalizados, aplicando formatação em negrito nos cabeçalhos e autoajuste de colunas para melhorar a legibilidade. Cada conjunto de dados é organizado em abas (sheets) semanticamente nomeadas, facilitando a navegação.
+  A camada visual foi construída com componentes modulares (cards) que renderizam diferentes tipos de métricas: cartões informativos para dados consolidados (total de funcionários, empresas ativas, folha salarial), gráficos interativos usando Chart.js e ApexCharts para visualização de tendências temporais e distribuições.
   
-  Já nos relatórios em PDF, utilizei PdfPTable com larguras proporcionais entre colunas, além de títulos centralizados e distinção visual entre cabeçalhos e conteúdo, o que garante clareza mesmo em arquivos extensos.
-  
-  O Frontend atua apenas na seleção dos filtros e no download dos arquivos gerados pelo backend.
+  Implementei sistema de atualização automática dos dados, com loading states e tratamento de erros para garantir uma experiência fluida. O layout responsivo garante visualização otimizada em diferentes dispositivos, enquanto filtros de período permitem análises customizadas.
 
-- **Sistema de Conversão de Dados**
+</details>
 
-    **Objetivo:**: Implementar uma arquitetura robusta de separação entre camadas através de conversores, garantindo que as entidades não fossem expostas diretamente na API e que os dados trafegassem de forma controlada e segura entre as camadas de persistência, negócio e apresentação.
+##### Relacionamento de Entidades
+**Objetivo:** Estruturar entidades com tabela pivot para múltiplos vínculos (empregado, cargo, empresa) e salários distintos.
+<details>
+<summary><strong>Relacionamento de Entidades</strong></summary>
 
-    Implementei um sistema padronizado de conversão baseado na interface genérica Converter<E, D>, responsável por definir um contrato para a transformação entre entidades  e Data Transfer Objects (DTOs). Esse contrato estabelece métodos para conversões individuais e também para listas, permitindo tanto operações unitárias quanto em lote.
-    
-    Como exemplo prático, desenvolvi o PositionConverter, que é injetado no PositionService através do mecanismo de injeção de dependência do Spring. Essa integração permitiu aplicar os conversores de forma consistente em todas as operações CRUD: na criação (createPosition), o DTO recebido é convertido em entity antes da persistência; nas consultas (getPositionById, getAllPositions), as entidades recuperadas do banco são transformadas em DTOs antes de chegar ao controller; nas atualizações (updatePositionById), os dados do DTO são aplicados seletivamente na entity existente.
+O modelo foi desenhado com três entidades principais: Empregado, Cargo e Empresa. Cada uma delas é independente, possuindo sua própria chave primária. A ligação entre essas entidades acontece por meio de uma tabela de relacionamento (ou tabela pivot), que armazena as chaves estrangeiras referentes a cada uma delas.
 
+Essa tabela pivot, além de associar as entidades, também é responsável por guardar o salário. Com isso, é possível modelar cenários complexos em que, por exemplo, um mesmo empregado pode ocupar cargos diferentes em empresas distintas, recebendo valores de remuneração específicos para cada vínculo.
 
+Do ponto de vista da integridade, foram aplicadas restrições de chave estrangeira para garantir que os vínculos sempre estejam associados a registros válidos de empregado, cargo e empresa. Isso assegura a consistência do banco de dados e evita duplicidade ou perda de informações.
+
+</details>
+
+##### Geração de Relatórios
+**Objetivo:** Exportar automaticamente dados consolidados em PDF e Excel para análise.
+<details>
+<summary><strong>Geração de Relatórios</strong></summary>
+
+No backend, fui responsável pela implementação completa do sistema de relatórios, integrando o ReportService ao DashboardController. Esse módulo suporta quatro tipos principais de relatórios: listagem de empresas, funcionários vinculados a cada empresa, folhas de ponto individuais e consolidação de horas trabalhadas por empresa.
+
+Para a camada de geração, utilizei duas bibliotecas específicas: Apache POI para criação de planilhas Excel e iText PDF para documentos em PDF. No caso das planilhas, configurei estilização com CellStyle e Font personalizados, aplicando formatação em negrito nos cabeçalhos e autoajuste de colunas para melhorar a legibilidade. Cada conjunto de dados é organizado em abas (sheets) semanticamente nomeadas, facilitando a navegação.
+
+Já nos relatórios em PDF, utilizei PdfPTable com larguras proporcionais entre colunas, além de títulos centralizados e distinção visual entre cabeçalhos e conteúdo, o que garante clareza mesmo em arquivos extensos.
+
+O Frontend atua apenas na seleção dos filtros e no download dos arquivos gerados pelo backend.
+
+</details>
+
+##### Sistema de Conversão de Dados
+**Objetivo:** Separar camadas via conversores garantindo DTOs seguros e não expondo entidades diretamente.
+<details>
+<summary><strong>Sistema de Conversão de Dados</strong></summary>
+
+Implementei um sistema padronizado de conversão baseado na interface genérica Converter<E, D>, responsável por definir um contrato para a transformação entre entidades  e Data Transfer Objects (DTOs). Esse contrato estabelece métodos para conversões individuais e também para listas, permitindo tanto operações unitárias quanto em lote.
+
+Como exemplo prático, desenvolvi o PositionConverter, que é injetado no PositionService através do mecanismo de injeção de dependência do Spring. Essa integração permitiu aplicar os conversores de forma consistente em todas as operações CRUD: na criação (createPosition), o DTO recebido é convertido em entity antes da persistência; nas consultas (getPositionById, getAllPositions), as entidades recuperadas do banco são transformadas em DTOs antes de chegar ao controller; nas atualizações (updatePositionById), os dados do DTO são aplicados seletivamente na entity existente.
+
+</details>
 
 #### Hard Skills
 
-- **Java + Spring Boot** – Domínio no desenvolvimento de APIs seguras, incluindo autenticação JWT, controle de acesso e implementação de filtros personalizados. Isso me permitiu criar um backend confiável para lidar com dados sensíveis e proteger rotas da aplicação.
-
+- **Java + Spring Boot** – Domínio no desenvolvimento de APIs seguras, incluindo autenticação JWT, controle de acesso e implementação de filtros personalizados.
+  - Exemplo: JwtAuthenticationFilter e geração/validação de refresh tokens; na Dashboard usei CompletableFuture para paralelizar métricas de múltiplas empresas.
+- **Vue.js 3** – Estrutura de aplicação reativa com roteamento protegido.
+  - Exemplo: Guards de rota e redirecionamento pós-login na Autenticação JWT; componentes de cards reativos e filtros de período na Dashboard.
+- **Chart.js + ApexCharts** – Criação de visualizações claras e dinâmicas.
+  - Exemplo: Gráfico de linha de horas trabalhadas por intervalo e gráfico de pizza/distribuição de funcionários por empresa na Dashboard.
+- **Banco de Dados Relacional + Supabase** – Modelagem de relacionamentos complexos e persistência segura na nuvem.
+  - Exemplo: Tabela pivot permitindo múltiplos vínculos empregado-cargo-empresa com salários distintos; consultas estruturadas para montar planilhas e PDFs nos Relatórios.
+- **Programação Concorrente em Java** – Otimização de agregação de dados.
+  - Exemplo: Dashboard processa cada empresa em tarefas paralelas (ExecutorService + CompletableFuture) reduzindo latência em grandes volumes.
 - **Vue.js 3** – Capacidade de estruturar aplicações frontend reativas, com roteamento protegido e design moderno e estiloso.
 
 - **Chart.js + ApexCharts** – Habilidade em criar dashboards interativas e responsivas, transformando dados brutos em visualizações claras e dinâmicas para facilitar a análise dos usuários.
-
-- **Banco de Dados Relacional + Supabase** – Experiência em modelagem de entidades complexas, aplicando constraints de integridade e garantindo consistência dos dados. Assim como conectar o banco em uma plataforma cloud para deploy da aplicação.
-
-- **Programação Concorrente em Java** – Conhecimento na otimização de processamento de grandes volumes de dados em paralelo, garantindo performance em operações de agregação de métricas para o dashboard.
-
-#### Soft Skills
-
+- Trabalho em equipe
+  - Exemplo: Alinhei com o frontend o formato das claims (isAdmin) antes de finalizar o filtro de autenticação para evitar retrabalho entre camadas.
+- Comunicação técnica
+  - Exemplo: Expliquei o fluxo de refresh token e o modelo da tabela pivot usando diagramas simples antes da implementação, acelerando entendimento do time.
+- Aprendizado contínuo
+  - Exemplo: Pesquisei padrões de DTO e introduzi o Converter<E,D> para evitar exposição de entidades JPA e facilitar manutenção futura.
+- Pensamento orientado a usuário
+  - Exemplo: Mantive histórico de rota para retorno pós-login (melhor usabilidade) e priorizei KPIs chave no topo da Dashboard (funcionários, empresas, folha, horas) para visão imediata.
+- Comunicação técnica – Ex: Expliquei o fluxo de refresh token e o modelo da tabela pivot usando diagramas simples antes da implementação, acelerando entendimento do time.
+- Aprendizado contínuo – Ex: Pesquisei padrões de DTO e introduzi o Converter<E,D> para evitar exposição de entidades JPA e facilitar manutenção futura.
 - Trabalho em equipe – Atuei em conjunto com o time para dividir responsabilidades e repassar conhecimentos para outros membros, assim como fazer perguntas quando precisei.
 
 - Comunicação técnica – Precisei traduzir conceitos mais complexos (como autenticação JWT, concorrência e modelagem relacional) para colegas de equipe com diferentes níveis de familiaridade. Isso facilitou a tomada de decisão sem que todos precisassem pesquisar o tópico tecnicamente.
@@ -136,6 +161,8 @@ A empresa parceira foi a **Altave**, que apresentou a necessidade de uma soluç�
 - Aprendizado contínuo – Desenvolvi novas competências técnicas (como concorrência) ao longo do projeto, sempre pesquisando e testando alternativas para entregar soluções mais completas.
 
 - Pensamento orientado a usuário – Mesmo focado no backend, procurei desenhar endpoints e fluxos de autenticação pensando na experiência final de quem utiliza o sistema, garantindo simplicidade e clareza nos retornos da API.
+
+
 
 
 
